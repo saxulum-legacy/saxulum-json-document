@@ -14,7 +14,7 @@ abstract class AbstractElement extends AbstractNode
             return null;
         }
 
-        return $this->getSibling($parent->getChilds(), -1);
+        return $this->getSibling($parent->getNodes(), -1);
     }
 
     /**
@@ -27,6 +27,6 @@ abstract class AbstractElement extends AbstractNode
             return null;
         }
 
-        return $this->getSibling($parent->getChilds(), 1);
+        return $this->getSibling($parent->getNodes(), 1);
     }
 }

@@ -12,13 +12,9 @@ class AttributeNode extends AbstractNode
     /**
      * @return string
      */
-    public function getName()
+    public function getFormattedName()
     {
-        if('@' !== substr($this->name, 0, 1)) {
-            return '@' . $this->name;
-        }
-
-        return $this->name;
+        return '@' . $this->name;
     }
 
     /**

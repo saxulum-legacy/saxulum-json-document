@@ -7,7 +7,7 @@ class ObjectNode extends AbstractParent
     /**
      * @var AttributeNode[]
      */
-    protected $attributes;
+    protected $attributes = array();
 
     /**
      * @param AttributeNode $attribute
@@ -58,32 +58,32 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    public function addChild(AbstractElement $child)
+    public function addNode(AbstractElement $node)
     {
-        $name = $child->getName();
-        if(isset($this->childs[$name])) {
+        $name = $node->getName();
+        if(isset($this->nodes[$name])) {
             throw new \InvalidArgumentException("There is allready a node with this name!");
         }
 
-        $this->checkNode($child);
+        $this->checkNode($node);
         $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $child, 'parent', $this);
-        $this->childs[$child->getName()] = $child;
+        $this->setProperty($ref, $node, 'parent', $this);
+        $this->nodes[$node->getName()] = $node;
     }
 
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    public function removeChild(AbstractElement $child)
+    public function removeNode(AbstractElement $node)
     {
-        $name = $child->getName();
-        if(!isset($this->childs[$name])) {
+        $name = $node->getName();
+        if(!isset($this->nodes[$name])) {
             throw new \InvalidArgumentException("Unknown node!");
         }
 
         $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $child, 'parent', null);
+        $this->setProperty($ref, $node, 'parent', null);
     }
 }

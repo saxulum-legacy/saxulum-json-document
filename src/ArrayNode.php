@@ -5,30 +5,30 @@ namespace Saxulum\JsonDocument;
 class ArrayNode extends AbstractParent
 {
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    public function addChild(AbstractElement $child)
+    public function addNode(AbstractElement $node)
     {
-        if(in_array($child, $this->childs, true)) {
+        if(in_array($node, $this->nodes, true)) {
             throw new \InvalidArgumentException("You can't add the same node twice!");
         }
 
-        $this->checkNode($child);
+        $this->checkNode($node);
         $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $child, 'parent', $this);
-        $this->childs[] = $child;
+        $this->setProperty($ref, $node, 'parent', $this);
+        $this->nodes[] = $node;
     }
 
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    public function removeChild(AbstractElement $child)
+    public function removeNode(AbstractElement $node)
     {
-        if(false !== $index = array_search($child, $this->childs, true)) {
+        if(false !== $index = array_search($node, $this->nodes, true)) {
             throw new \InvalidArgumentException("Unknown node!");
         }
 
         $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $child, 'parent', null);
+        $this->setProperty($ref, $node, 'parent', null);
     }
 }

@@ -32,25 +32,34 @@ abstract class AbstractParent extends AbstractElement
     /**
      * @var AbstractElement[]
      */
-    protected $childs;
+    protected $nodes = array();
 
     /**
      * @return AbstractElement[]
      */
-    public function getChilds()
+    public function getNodes()
     {
-        return $this->childs;
+        return $this->nodes;
     }
 
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    abstract public function addChild(AbstractElement $child);
+    abstract public function addNode(AbstractElement $node);
 
     /**
-     * @param AbstractElement $child
+     * @param AbstractElement $node
      */
-    abstract public function removeChild(AbstractElement $child);
+    abstract public function removeNode(AbstractElement $node);
+
+    /**
+     * @param int|string $index node name or index, depends on object or array
+     * @return AbstractElement|null
+     */
+    public function getNode($index)
+    {
+        return isset($this->nodes[$index]) ? $this->nodes[$index] : null;
+    }
 
     /**
      * @return \ReflectionClass
