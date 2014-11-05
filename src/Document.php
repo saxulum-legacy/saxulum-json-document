@@ -64,4 +64,97 @@ class Document extends ObjectNode
 
         return $array;
     }
+
+    /**
+     * @param  AbstractNode $node
+     * @param  int          $options
+     * @return string
+     */
+    public function save(AbstractNode $node = null, $options = 0)
+    {
+        if (null === $node) {
+            $node = $this;
+        }
+
+        return json_encode($this->getArray($node), $options);
+    }
+
+    /**
+     * @param  AbstractNode $node
+     * @return array
+     */
+    protected function getArray(AbstractNode $node)
+    {
+        if ($node instanceof AttributeNode) {
+            return $this->getArrayFromAttributeNode($node);
+        } elseif ($node instanceof ValueNode) {
+            return $this->getArrayFromValueNode($node);
+        } elseif ($node instanceof ObjectNode) {
+            return $this->getArrayFromObjectNode($node);
+        } elseif ($node instanceof ArrayNode) {
+            return $this->getArrayFromArrayNode($node);
+        }
+
+        throw new \InvalidArgumentException("There is no logic for this node type!");
+    }
+
+    /**
+     * @param  AttributeNode $node
+     * @return array
+     */
+    protected function getArrayFromAttributeNode(AttributeNode $node)
+    {
+        return array($node->getFormattedName() => $node->getValue());
+    }
+
+    /**
+     * @param  ValueNode $node
+     * @return array
+     */
+    protected function getArrayFromValueNode(ValueNode $node)
+    {
+        return array($node->getName() => $node->getValue());
+    }
+
+    /**
+     * @param  ObjectNode $node
+     * @return array
+     */
+    protected function getArrayFromObjectNode(ObjectNode $node)
+    {
+        $array = array();
+
+        foreach ($node->getAttributes() as $attribute) {
+            $array[$attribute->getFormattedName()] = $attribute->getValue();
+        }
+
+        foreach ($node->getNodes() as $name => $childNode) {
+            if ($childNode instanceof ValueNode) {
+                $array[$name] = $childNode->getValue();
+            } else {
+                $array[$name] = $this->getArray($childNode);
+            }
+        }
+
+        return $array;
+    }
+
+    /**
+     * @param  ArrayNode $node
+     * @return array
+     */
+    protected function getArrayFromArrayNode(ArrayNode $node)
+    {
+        $array = array();
+
+        foreach ($node->getNodes() as $index => $childNode) {
+            if ($childNode instanceof ValueNode) {
+                $array[$index] = $childNode->getValue();
+            } else {
+                $array[$index] = $this->getArray($childNode);
+            }
+        }
+
+        return $array;
+    }
 }

@@ -154,4 +154,73 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($node2, $node3->previousSibling());
         $this->assertEquals(null, $node3->nextSibling());
     }
+
+    public function testSave()
+    {
+        $document = new Document();
+
+        $object = $document->createObjectNode('object');
+        $document->addNode($object);
+
+        $attribute1 = $document->createAttributeNode('attribute1');
+        $attribute1->setValue('attribute1');
+        $object->addAttribute($attribute1);
+
+        $attribute2 = $document->createAttributeNode('attribute2');
+        $attribute2->setValue('attribute2');
+        $object->addAttribute($attribute2);
+
+        $attribute3 = $document->createAttributeNode('attribute3');
+        $attribute3->setValue('attribute3');
+        $object->addAttribute($attribute3);
+
+        $node1 = $document->createValueNode('node1');
+        $node1->setValue('node1');
+        $object->addNode($node1);
+
+        $node2 = $document->createValueNode('node2');
+        $node2->setValue('node2');
+        $object->addNode($node2);
+
+        $node3 = $document->createValueNode('node3');
+        $node3->setValue('node3');
+        $object->addNode($node3);
+
+        $object1 = $document->createObjectNode('object');
+        $object->addNode($object1);
+
+        $node11 = $document->createValueNode('node1');
+        $node11->setValue('node1');
+        $object1->addNode($node11);
+
+        $node12 = $document->createValueNode('node2');
+        $node12->setValue('node2');
+        $object1->addNode($node12);
+
+        $node13 = $document->createValueNode('node3');
+        $node13->setValue('node3');
+        $object1->addNode($node13);
+
+        $array1 = $document->createArrayNode('array');
+        $object->addNode($array1);
+
+        $object2 = $document->createObjectNode('object');
+        $array1->addNode($object2);
+
+        $node21 = $document->createValueNode('node1');
+        $node21->setValue('node1');
+        $object2->addNode($node21);
+
+        $node22 = $document->createValueNode('node2');
+        $node22->setValue('node2');
+        $object2->addNode($node22);
+
+        $node23 = $document->createValueNode('node3');
+        $node23->setValue('node3');
+        $object2->addNode($node23);
+
+        $json = $document->save($document);
+
+        $this->assertEquals('{"object":{"@attribute1":"attribute1","@attribute2":"attribute2","@attribute3":"attribute3","node1":"node1","node2":"node2","node3":"node3","object":{"node1":"node1","node2":"node2","node3":"node3"},"array":[{"node1":"node1","node2":"node2","node3":"node3"}]}}', $json);
+    }
 }
