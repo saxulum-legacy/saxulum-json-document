@@ -15,7 +15,7 @@ class ObjectNode extends AbstractParent
     public function addAttribute(AttributeNode $attribute)
     {
         $name = $attribute->getName();
-        if(isset($this->attributes[$name])) {
+        if (isset($this->attributes[$name])) {
             throw new \InvalidArgumentException("There is allready a attribute with this name!");
         }
 
@@ -32,7 +32,7 @@ class ObjectNode extends AbstractParent
     public function removeAttribute(AttributeNode $attribute)
     {
         $name = $attribute->getName();
-        if(!isset($this->attributes[$name])) {
+        if (!isset($this->attributes[$name])) {
             throw new \InvalidArgumentException("Unknown node!");
         }
 
@@ -63,7 +63,7 @@ class ObjectNode extends AbstractParent
     public function addNode(AbstractElement $node)
     {
         $name = $node->getName();
-        if(isset($this->nodes[$name])) {
+        if (isset($this->nodes[$name])) {
             throw new \InvalidArgumentException("There is allready a node with this name!");
         }
 
@@ -79,7 +79,7 @@ class ObjectNode extends AbstractParent
     public function removeNode(AbstractElement $node)
     {
         $name = $node->getName();
-        if(!isset($this->nodes[$name])) {
+        if (!isset($this->nodes[$name])) {
             throw new \InvalidArgumentException("Unknown node!");
         }
 

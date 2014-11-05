@@ -26,7 +26,7 @@ class AttributeNode extends AbstractNode
     }
 
     /**
-     * @param bool|float|int|null|string $value
+     * @param  bool|float|int|null|string $value
      * @return $this
      */
     public function setValue($value)
@@ -40,7 +40,7 @@ class AttributeNode extends AbstractNode
     public function previousSibling()
     {
         /** @var ObjectNode $parent */
-        if(null === $parent = $this->parent) {
+        if (null === $parent = $this->parent) {
             return null;
         }
 
@@ -53,7 +53,7 @@ class AttributeNode extends AbstractNode
     public function nextSibling()
     {
         /** @var ObjectNode $parent */
-        if(null === $parent = $this->parent) {
+        if (null === $parent = $this->parent) {
             return null;
         }
 

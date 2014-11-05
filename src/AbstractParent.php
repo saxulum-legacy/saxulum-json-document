@@ -53,7 +53,7 @@ abstract class AbstractParent extends AbstractElement
     abstract public function removeNode(AbstractElement $node);
 
     /**
-     * @param int|string $index node name or index, depends on object or array
+     * @param  int|string           $index node name or index, depends on object or array
      * @return AbstractElement|null
      */
     public function getNode($index)
@@ -66,7 +66,7 @@ abstract class AbstractParent extends AbstractElement
      */
     protected function getAbstractNodeReflection()
     {
-        if(null === $this->rAbstractNode) {
+        if (null === $this->rAbstractNode) {
             $this->rAbstractNode = new \ReflectionClass('Saxulum\JsonDocument\AbstractNode');
         }
 
@@ -78,10 +78,10 @@ abstract class AbstractParent extends AbstractElement
      */
     protected function getAttributeNodeReflection()
     {
-        if(null === $this->rAttributeNode) {
+        if (null === $this->rAttributeNode) {
             $this->rAttributeNode = new \ReflectionClass('Saxulum\JsonDocument\AttributeNode');
         }
-        
+
         return $this->rAttributeNode;
     }
 
@@ -90,7 +90,7 @@ abstract class AbstractParent extends AbstractElement
      */
     protected function getValueNodeReflection()
     {
-        if(null === $this->rValueNode) {
+        if (null === $this->rValueNode) {
             $this->rValueNode = new \ReflectionClass('Saxulum\JsonDocument\ValueNode');
         }
 
@@ -102,7 +102,7 @@ abstract class AbstractParent extends AbstractElement
      */
     protected function getObjectNodeReflection()
     {
-        if(null === $this->rObjectNode) {
+        if (null === $this->rObjectNode) {
             $this->rObjectNode = new \ReflectionClass('Saxulum\JsonDocument\ObjectNode');
         }
 
@@ -114,7 +114,7 @@ abstract class AbstractParent extends AbstractElement
      */
     protected function getArrayNodeReflection()
     {
-        if(null === $this->rArrayNode) {
+        if (null === $this->rArrayNode) {
             $this->rArrayNode = new \ReflectionClass('Saxulum\JsonDocument\ArrayNode');
         }
 
@@ -123,9 +123,9 @@ abstract class AbstractParent extends AbstractElement
 
     /**
      * @param \ReflectionClass $ref
-     * @param object $object
-     * @param string $property
-     * @param mixed $value
+     * @param object           $object
+     * @param string           $property
+     * @param mixed            $value
      */
     protected function setProperty(\ReflectionClass $ref, $object, $property, $value)
     {
@@ -136,16 +136,16 @@ abstract class AbstractParent extends AbstractElement
     }
 
     /**
-     * @param AbstractNode $node
+     * @param  AbstractNode $node
      * @throws \Exception
      */
     protected function checkNode(AbstractNode $node)
     {
-        if(null === $node->getName()) {
+        if (null === $node->getName()) {
             throw new \Exception("Use the create<nodetype>Node on document!");
         }
 
-        if(null === $node->getDocument() || $this->getDocument() !== $node->getDocument()) {
+        if (null === $node->getDocument() || $this->getDocument() !== $node->getDocument()) {
             throw new \Exception("Use the create<nodetype>Node on document!");
         }
     }

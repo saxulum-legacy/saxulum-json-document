@@ -2,7 +2,6 @@
 
 namespace Saxulum\JsonDocument;
 
-
 class Document extends ObjectNode
 {
     public function __construct()
@@ -11,7 +10,7 @@ class Document extends ObjectNode
     }
 
     /**
-     * @param string $name
+     * @param  string        $name
      * @return AttributeNode
      */
     public function createAttributeNode($name)
@@ -25,7 +24,7 @@ class Document extends ObjectNode
     }
 
     /**
-     * @param string $name
+     * @param  string    $name
      * @return ValueNode
      */
     public function createValueNode($name)
@@ -39,7 +38,7 @@ class Document extends ObjectNode
     }
 
     /**
-     * @param string $name
+     * @param  string     $name
      * @return ObjectNode
      */
     public function createObjectNode($name)
@@ -53,7 +52,7 @@ class Document extends ObjectNode
     }
 
     /**
-     * @param string $name
+     * @param  string    $name
      * @return ArrayNode
      */
     public function createArrayNode($name)

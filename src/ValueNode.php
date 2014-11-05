@@ -18,7 +18,7 @@ class ValueNode extends AbstractElement
     }
 
     /**
-     * @param bool|float|int|null|string $value
+     * @param  bool|float|int|null|string $value
      * @return $this
      */
     public function setValue($value)

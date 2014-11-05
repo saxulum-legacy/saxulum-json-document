@@ -54,8 +54,8 @@ abstract class AbstractNode
     abstract public function nextSibling();
 
     /**
-     * @param AbstractNode[] $nodes
-     * @param int $rel
+     * @param  AbstractNode[]     $nodes
+     * @param  int                $rel
      * @return null|AttributeNode
      */
     protected function getSibling(array $nodes, $rel)
@@ -65,7 +65,7 @@ abstract class AbstractNode
         $nodeIndex = array_search($nodeKey, $nodeKeys, true);
         $prevNodeIndex = $nodeIndex + $rel;
 
-        if(!isset($nodeKeys[$prevNodeIndex])) {
+        if (!isset($nodeKeys[$prevNodeIndex])) {
             return null;
         }
 

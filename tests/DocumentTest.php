@@ -57,7 +57,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $object->addAttribute($attribute3);
 
         $this->assertCount(3, $object->getAttributes());
-        
+
         $this->assertEquals($attribute1, $object->getAttribute('attribute1'));
         $this->assertEquals($attribute2, $object->getAttribute('attribute2'));
         $this->assertEquals($attribute3, $object->getAttribute('attribute3'));
