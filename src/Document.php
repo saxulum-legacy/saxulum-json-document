@@ -15,8 +15,8 @@ class Document extends ObjectNode
      */
     public function createAttributeNode($name)
     {
-        $ref = $this->getAttributeNodeReflection();
-        $attribute = $ref->newInstanceWithoutConstructor();
+        $attribute = new AttributeNode();
+        $ref = $this->getAbstractNodeReflection();
         $this->setProperty($ref, $attribute, 'name', $name);
         $this->setProperty($ref, $attribute, 'document', $this);
 
@@ -29,8 +29,8 @@ class Document extends ObjectNode
      */
     public function createValueNode($name)
     {
-        $ref = $this->getValueNodeReflection();
-        $value = $ref->newInstanceWithoutConstructor();
+        $value = new ValueNode();
+        $ref = $this->getAbstractNodeReflection();
         $this->setProperty($ref, $value, 'name', $name);
         $this->setProperty($ref, $value, 'document', $this);
 
@@ -43,8 +43,8 @@ class Document extends ObjectNode
      */
     public function createObjectNode($name)
     {
-        $ref = $this->getObjectNodeReflection();
-        $object = $ref->newInstanceWithoutConstructor();
+        $object = new ObjectNode();
+        $ref = $this->getAbstractNodeReflection();
         $this->setProperty($ref, $object, 'name', $name);
         $this->setProperty($ref, $object, 'document', $this);
 
@@ -57,8 +57,8 @@ class Document extends ObjectNode
      */
     public function createArrayNode($name)
     {
-        $ref = $this->getArrayNodeReflection();
-        $array = $ref->newInstanceWithoutConstructor();
+        $array = new ArrayNode();
+        $ref = $this->getAbstractNodeReflection();
         $this->setProperty($ref, $array, 'name', $name);
         $this->setProperty($ref, $array, 'document', $this);
 
