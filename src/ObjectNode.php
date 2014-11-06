@@ -16,7 +16,7 @@ class ObjectNode extends AbstractParent
     {
         $name = $attribute->getName();
         if (isset($this->attributes[$name])) {
-            throw new \InvalidArgumentException("There is allready a attribute with this name!");
+            throw new \InvalidArgumentException(sprintf("There is allready a attribute with this name '%s'!", $name));
         }
 
         $this->checkNode($attribute);
