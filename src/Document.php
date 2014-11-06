@@ -68,15 +68,22 @@ class Document extends ObjectNode
     /**
      * @param  AbstractNode $node
      * @param  int          $options
+     * @param  callable     $filter  to remove something: function ($value, $key) { return true; }
      * @return string
      */
-    public function save(AbstractNode $node = null, $options = 0)
+    public function save(AbstractNode $node = null, $options = 0, \Closure $filter = null)
     {
         if (null === $node) {
             $node = $this;
         }
 
-        return json_encode($this->getArray($node), $options);
+        $array = $this->getArray($node);
+
+        if (null !== $filter) {
+            $array = $this->walkRecursiveRemove($array, $filter);
+        }
+
+        return json_encode($array, $options);
     }
 
     /**
@@ -152,6 +159,28 @@ class Document extends ObjectNode
                 $array[$index] = $childNode->getValue();
             } else {
                 $array[$index] = $this->getArray($childNode);
+            }
+        }
+
+        return $array;
+    }
+
+    /**
+     * @source https://github.com/gajus/marray/blob/master/src/marray.php
+     * @copyright Copyright (c) 2013-2014, Anuary (http://anuary.com/)
+     * @param  array    $array
+     * @param  callable $callback
+     * @return array
+     */
+    protected function walkRecursiveRemove(array $array, callable $callback)
+    {
+        foreach ($array as $k => $v) {
+            if (is_array($v)) {
+                $array[$k] = $this->walkRecursiveRemove($v, $callback);
+            } else {
+                if ($callback($v, $k)) {
+                    unset($array[$k]);
+                }
             }
         }
 
