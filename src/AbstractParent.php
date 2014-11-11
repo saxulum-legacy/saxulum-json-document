@@ -5,11 +5,6 @@ namespace Saxulum\JsonDocument;
 abstract class AbstractParent extends AbstractElement
 {
     /**
-     * @var \ReflectionClass
-     */
-    protected $rAbstractNode;
-
-    /**
      * @var AbstractElement[]
      */
     protected $nodes = array();
@@ -39,32 +34,6 @@ abstract class AbstractParent extends AbstractElement
     public function getNode($index)
     {
         return isset($this->nodes[$index]) ? $this->nodes[$index] : null;
-    }
-
-    /**
-     * @return \ReflectionClass
-     */
-    protected function getAbstractNodeReflection()
-    {
-        if (null === $this->rAbstractNode) {
-            $this->rAbstractNode = new \ReflectionClass('Saxulum\JsonDocument\AbstractNode');
-        }
-
-        return $this->rAbstractNode;
-    }
-
-    /**
-     * @param \ReflectionClass $ref
-     * @param object           $object
-     * @param string           $property
-     * @param mixed            $value
-     */
-    protected function setProperty(\ReflectionClass $ref, $object, $property, $value)
-    {
-        $pRef = $ref->getProperty($property);
-        $pRef->setAccessible(true);
-        $pRef->setValue($object, $value);
-        $pRef->setAccessible(false);
     }
 
     /**

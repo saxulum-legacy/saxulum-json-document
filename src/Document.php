@@ -2,11 +2,43 @@
 
 namespace Saxulum\JsonDocument;
 
-class Document extends ObjectNode
+class Document extends AbstractNode
 {
-    public function __construct()
+    /**
+     * @var AbstractParent $node
+     */
+    protected $node;
+
+    protected function __construct() {}
+
+    /**
+     * @return Document
+     */
+    public static function newByObjectNode()
     {
-        $this->document = $this;
+        $instance = new self();
+        $instance->node = $instance->createObjectNode('__document__');
+
+        return $instance;
+    }
+
+    /**
+     * @return Document
+     */
+    public static function newByArrayNode()
+    {
+        $instance = new self();
+        $instance->node = $instance->createArrayNode('__document__');
+
+        return $instance;
+    }
+
+    /**
+     * @return ObjectNode|ArrayNode
+     */
+    public function getMainNode()
+    {
+        return $this->node;
     }
 
     /**
@@ -66,15 +98,68 @@ class Document extends ObjectNode
     }
 
     /**
+     * @param \ReflectionClass $ref
+     * @param object           $object
+     * @param string           $property
+     * @param mixed            $value
+     */
+    public function setProperty(\ReflectionClass $ref, $object, $property, $value)
+    {
+        $pRef = $ref->getProperty($property);
+        $pRef->setAccessible(true);
+        $pRef->setValue($object, $value);
+        $pRef->setAccessible(false);
+    }
+
+    /**
+     * @return $this
+     */
+    public function getDocument()
+    {
+        return $this;
+    }
+
+    /**
+     * @return AbstractNode|null
+     */
+    public function previousSibling()
+    {
+        /** @var AbstractParent $parent */
+        if (null === $node = $this->node) {
+            return null;
+        }
+
+        return $this->getSibling($node->getNodes(), -1);
+    }
+
+    /**
+     * @return AbstractNode|null
+     */
+    public function nextSibling()
+    {
+        /** @var AbstractParent $parent */
+        if (null === $node = $this->node) {
+            return null;
+        }
+
+        return $this->getSibling($node->getNodes(), 1);
+    }
+
+    /**
      * @param  AbstractNode $node
      * @param  int          $options
-     * @param  callable     $filter  to remove something: function ($value, $key) { return true; }
+     * @param  callable     $filter
      * @return string
+     * @throws \Exception
      */
     public function save(AbstractNode $node = null, $options = 0, \Closure $filter = null)
     {
         if (null === $node) {
-            $node = $this;
+            if (null === $this->node) {
+                throw new \Exception("There is no main node on this document!");
+            }
+
+            $node = $this->node;
         }
 
         $array = $this->getArray($node);

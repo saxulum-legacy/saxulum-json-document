@@ -20,6 +20,11 @@ abstract class AbstractNode
     protected $parent;
 
     /**
+     * @var \ReflectionClass
+     */
+    protected $rAbstractNode;
+
+    /**
      * @return string
      */
     public function getName()
@@ -72,5 +77,31 @@ abstract class AbstractNode
         $prevNodeIndex = $nodeKeys[$prevNodeIndex];
 
         return $nodes[$prevNodeIndex];
+    }
+
+    /**
+     * @return \ReflectionClass
+     */
+    protected function getAbstractNodeReflection()
+    {
+        if (null === $this->rAbstractNode) {
+            $this->rAbstractNode = new \ReflectionClass(__CLASS__);
+        }
+
+        return $this->rAbstractNode;
+    }
+
+    /**
+     * @param \ReflectionClass $ref
+     * @param object           $object
+     * @param string           $property
+     * @param mixed            $value
+     */
+    protected function setProperty(\ReflectionClass $ref, $object, $property, $value)
+    {
+        $pRef = $ref->getProperty($property);
+        $pRef->setAccessible(true);
+        $pRef->setValue($object, $value);
+        $pRef->setAccessible(false);
     }
 }
