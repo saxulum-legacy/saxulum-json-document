@@ -14,8 +14,7 @@ class ArrayNode extends AbstractParent
         }
 
         $this->checkNode($node);
-        $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $node, 'parent', $this);
+        $this->getDocument()->setProperty($node, 'parent', $this);
         $this->nodes[] = $node;
     }
 
@@ -28,7 +27,6 @@ class ArrayNode extends AbstractParent
             throw new \InvalidArgumentException("Unknown node!");
         }
 
-        $ref = $this->getAbstractNodeReflection();
-        $this->setProperty($ref, $node, 'parent', null);
+        $this->getDocument()->setProperty($node, 'parent', null);
     }
 }

@@ -9,7 +9,6 @@ abstract class AbstractElement extends AbstractNode
      */
     public function previousSibling()
     {
-        /** @var AbstractParent $parent */
         if (null === $parent = $this->parent) {
             return null;
         }
@@ -22,7 +21,6 @@ abstract class AbstractElement extends AbstractNode
      */
     public function nextSibling()
     {
-        /** @var AbstractParent $parent */
         if (null === $parent = $this->parent) {
             return null;
         }

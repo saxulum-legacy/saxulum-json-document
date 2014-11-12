@@ -8,7 +8,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 {
     public function testAttributeNodeCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $attribute = $document->createAttributeNode('attribute');
         $attribute->setValue('attribute');
@@ -20,7 +20,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testValueNodeCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $value = $document->createValueNode('value');
         $value->setValue('value');
@@ -31,7 +31,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectNodeCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $object = $document->createObjectNode('object');
 
@@ -40,29 +40,29 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectNodeAttributesCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $attribute1 = $document->createAttributeNode('attribute1');
         $attribute1->setValue('attribute1');
-        $document->getMainNode()->addAttribute($attribute1);
+        $document->addAttribute($attribute1);
 
         $attribute2 = $document->createAttributeNode('attribute2');
         $attribute2->setValue('attribute2');
-        $document->getMainNode()->addAttribute($attribute2);
+        $document->addAttribute($attribute2);
 
         $attribute3 = $document->createAttributeNode('attribute3');
         $attribute3->setValue('attribute3');
-        $document->getMainNode()->addAttribute($attribute3);
+        $document->addAttribute($attribute3);
 
-        $this->assertCount(3, $document->getMainNode()->getAttributes());
+        $this->assertCount(3, $document->getAttributes());
 
-        $this->assertEquals($attribute1, $document->getMainNode()->getAttribute('attribute1'));
-        $this->assertEquals($attribute2, $document->getMainNode()->getAttribute('attribute2'));
-        $this->assertEquals($attribute3, $document->getMainNode()->getAttribute('attribute3'));
+        $this->assertEquals($attribute1, $document->getAttribute('attribute1'));
+        $this->assertEquals($attribute2, $document->getAttribute('attribute2'));
+        $this->assertEquals($attribute3, $document->getAttribute('attribute3'));
 
-        $this->assertEquals($document->getMainNode(), $attribute1->getParent());
-        $this->assertEquals($document->getMainNode(), $attribute2->getParent());
-        $this->assertEquals($document->getMainNode(), $attribute3->getParent());
+        $this->assertEquals($document, $attribute1->getParent());
+        $this->assertEquals($document, $attribute2->getParent());
+        $this->assertEquals($document, $attribute3->getParent());
 
         $this->assertEquals(null, $attribute1->previousSibling());
         $this->assertEquals($attribute2, $attribute1->nextSibling());
@@ -74,29 +74,29 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectNodeNodesCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $node1 = $document->createValueNode('node1');
         $node1->setValue('node1');
-        $document->getMainNode()->addNode($node1);
+        $document->addNode($node1);
 
         $node2 = $document->createValueNode('node2');
         $node2->setValue('node2');
-        $document->getMainNode()->addNode($node2);
+        $document->addNode($node2);
 
         $node3 = $document->createValueNode('node3');
         $node3->setValue('node3');
-        $document->getMainNode()->addNode($node3);
+        $document->addNode($node3);
 
-        $this->assertCount(3, $document->getMainNode()->getNodes());
+        $this->assertCount(3, $document->getNodes());
 
-        $this->assertEquals($node1, $document->getMainNode()->getNode('node1'));
-        $this->assertEquals($node2, $document->getMainNode()->getNode('node2'));
-        $this->assertEquals($node3, $document->getMainNode()->getNode('node3'));
+        $this->assertEquals($node1, $document->getNode('node1'));
+        $this->assertEquals($node2, $document->getNode('node2'));
+        $this->assertEquals($node3, $document->getNode('node3'));
 
-        $this->assertEquals($document->getMainNode(), $node1->getParent());
-        $this->assertEquals($document->getMainNode(), $node2->getParent());
-        $this->assertEquals($document->getMainNode(), $node3->getParent());
+        $this->assertEquals($document, $node1->getParent());
+        $this->assertEquals($document, $node2->getParent());
+        $this->assertEquals($document, $node3->getParent());
 
         $this->assertEquals(null, $node1->previousSibling());
         $this->assertEquals($node2, $node1->nextSibling());
@@ -108,7 +108,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayNodeCreation()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $array = $document->createArrayNode('array');
 
@@ -117,29 +117,29 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayNodeNodesCreation()
     {
-        $document = Document::newByArrayNode();
+        $document = Document::createArrayNodeBased();
 
         $node1 = $document->createValueNode('node1');
         $node1->setValue('node1');
-        $document->getMainNode()->addNode($node1);
+        $document->addNode($node1);
 
         $node2 = $document->createValueNode('node2');
         $node2->setValue('node2');
-        $document->getMainNode()->addNode($node2);
+        $document->addNode($node2);
 
         $node3 = $document->createValueNode('node3');
         $node3->setValue('node3');
-        $document->getMainNode()->addNode($node3);
+        $document->addNode($node3);
 
-        $this->assertCount(3, $document->getMainNode()->getNodes());
+        $this->assertCount(3, $document->getNodes());
 
-        $this->assertEquals($node1, $document->getMainNode()->getNode(0));
-        $this->assertEquals($node2, $document->getMainNode()->getNode(1));
-        $this->assertEquals($node3, $document->getMainNode()->getNode(2));
+        $this->assertEquals($node1, $document->getNode(0));
+        $this->assertEquals($node2, $document->getNode(1));
+        $this->assertEquals($node3, $document->getNode(2));
 
-        $this->assertEquals($document->getMainNode(), $node1->getParent());
-        $this->assertEquals($document->getMainNode(), $node2->getParent());
-        $this->assertEquals($document->getMainNode(), $node3->getParent());
+        $this->assertEquals($document, $node1->getParent());
+        $this->assertEquals($document, $node2->getParent());
+        $this->assertEquals($document, $node3->getParent());
 
         $this->assertEquals(null, $node1->previousSibling());
         $this->assertEquals($node2, $node1->nextSibling());
@@ -151,10 +151,10 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testSave()
     {
-        $document = Document::newByObjectNode();
+        $document = Document::createObjectNodeBased();
 
         $object = $document->createObjectNode('object');
-        $document->getMainNode()->addNode($object);
+        $document->addNode($object);
 
         $attribute1 = $document->createAttributeNode('attribute1');
         $attribute1->setValue('attribute1');
