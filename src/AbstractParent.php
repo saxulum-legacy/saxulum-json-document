@@ -18,6 +18,15 @@ abstract class AbstractParent extends AbstractElement
     }
 
     /**
+     * @param  int|string           $index node name or index, depends on object or array
+     * @return AbstractElement|null
+     */
+    public function getNode($index)
+    {
+        return isset($this->nodes[$index]) ? $this->nodes[$index] : null;
+    }
+
+    /**
      * @param AbstractElement $node
      */
     abstract public function addNode(AbstractElement $node);
@@ -28,19 +37,10 @@ abstract class AbstractParent extends AbstractElement
     abstract public function removeNode(AbstractElement $node);
 
     /**
-     * @param  int|string           $index node name or index, depends on object or array
-     * @return AbstractElement|null
-     */
-    public function getNode($index)
-    {
-        return isset($this->nodes[$index]) ? $this->nodes[$index] : null;
-    }
-
-    /**
-     * @param  AbstractNode $node
+     * @param  AbstractElement $node
      * @throws \Exception
      */
-    protected function checkNode(AbstractNode $node)
+    protected function checkNode(AbstractElement $node)
     {
         if (null === $node->getName()) {
             throw new \Exception("Use the create<nodetype>Node on document!");
@@ -48,6 +48,16 @@ abstract class AbstractParent extends AbstractElement
 
         if (null === $node->getDocument() || $this->getDocument() !== $node->getDocument()) {
             throw new \Exception("Use the create<nodetype>Node on document!");
+        }
+    }
+
+    /**
+     * @param AbstractElement $node
+     */
+    protected function removeNodeFromParent(AbstractElement $node)
+    {
+        if (null !== $parent = $node->getParent()) {
+            $parent->removeNode($node);
         }
     }
 }

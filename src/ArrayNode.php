@@ -14,6 +14,7 @@ class ArrayNode extends AbstractParent
         }
 
         $this->checkNode($node);
+        $this->removeNodeFromParent($node);
         Document::setProperty($node, 'parent', $this);
         $this->nodes[] = $node;
     }

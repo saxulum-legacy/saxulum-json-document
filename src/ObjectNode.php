@@ -19,7 +19,8 @@ class ObjectNode extends AbstractParent
             throw new \InvalidArgumentException(sprintf("There is allready a attribute with this name '%s'!", $name));
         }
 
-        $this->checkNode($attribute);
+        $this->checkAttribute($attribute);
+        $this->removeAttributeFromParent($attribute);
         Document::setProperty($attribute, 'parent', $this);
         $this->attributes[$attribute->getName()] = $attribute;
     }
@@ -36,6 +37,32 @@ class ObjectNode extends AbstractParent
         }
 
         Document::setProperty($attribute, 'parent', null);
+    }
+
+    /**
+     * @param  AttributeNode $node
+     * @throws \Exception
+     */
+    protected function checkAttribute(AttributeNode $node)
+    {
+        if (null === $node->getName()) {
+            throw new \Exception("Use the createAttributeNode on document!");
+        }
+
+        if (null === $node->getDocument() || $this->getDocument() !== $node->getDocument()) {
+            throw new \Exception("Use the createAttributeNode on document!");
+        }
+    }
+
+    /**
+     * @param AttributeNode $node
+     */
+    protected function removeAttributeFromParent(AttributeNode $node)
+    {
+        if (null !== $parent = $node->getParent()) {
+            /** @var ObjectNode $parent */
+            $parent->removeAttribute($node);
+        }
     }
 
     /**
@@ -66,6 +93,7 @@ class ObjectNode extends AbstractParent
         }
 
         $this->checkNode($node);
+        $this->removeNodeFromParent($node);
         Document::setProperty($node, 'parent', $this);
         $this->nodes[$node->getName()] = $node;
     }
