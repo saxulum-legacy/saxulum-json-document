@@ -35,9 +35,10 @@ abstract class AbstractNodeToArrayHandler
 
     /**
      * @param  AbstractNode $node
+     * @param  bool         $embedded
      * @return array
      */
-    abstract public function getArray(AbstractNode $node);
+    abstract public function getArray(AbstractNode $node, $embedded = false);
 
     /**
      * @param  AbstractNode $node

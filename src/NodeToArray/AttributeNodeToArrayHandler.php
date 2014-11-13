@@ -9,15 +9,20 @@ class AttributeNodeToArrayHandler extends AbstractNodeToArrayHandler
 {
     /**
      * @param  AbstractNode $node
+     * @param  bool         $embedded
      * @return array
      */
-    public function getArray(AbstractNode $node)
+    public function getArray(AbstractNode $node, $embedded = false)
     {
         if (!$node instanceof AttributeNode) {
             throw new \InvalidArgumentException("Invalid node type!");
         }
 
-        return array($node->getFormattedName() => $node->getValue());
+        if (!$embedded) {
+            return array($node->getFormattedName() => $node->getValue());
+        }
+
+        return $node->getValue();
     }
 
     /**

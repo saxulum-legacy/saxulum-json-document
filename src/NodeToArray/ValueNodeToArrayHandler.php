@@ -9,15 +9,20 @@ class ValueNodeToArrayHandler extends AbstractNodeToArrayHandler
 {
     /**
      * @param  AbstractNode $node
+     * @param  bool         $embedded
      * @return array
      */
-    public function getArray(AbstractNode $node)
+    public function getArray(AbstractNode $node, $embedded = false)
     {
         if (!$node instanceof ValueNode) {
             throw new \InvalidArgumentException("Invalid node type!");
         }
 
-        return array($node->getName() => $node->getValue());
+        if (!$embedded) {
+            return array($node->getName() => $node->getValue());
+        }
+
+        return $node->getValue();
     }
 
     /**

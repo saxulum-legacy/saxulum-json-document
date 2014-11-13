@@ -4,15 +4,15 @@ namespace Saxulum\JsonDocument\NodeToArray;
 
 use Saxulum\JsonDocument\AbstractNode;
 use Saxulum\JsonDocument\ObjectNode;
-use Saxulum\JsonDocument\ValueNode;
 
 class ObjectNodeToArrayHandler extends AbstractNodeToArrayHandler
 {
     /**
      * @param  AbstractNode $node
+     * @param  bool         $embedded
      * @return array
      */
-    public function getArray(AbstractNode $node)
+    public function getArray(AbstractNode $node, $embedded = false)
     {
         if (!$node instanceof ObjectNode) {
             throw new \InvalidArgumentException("Invalid node type!");
@@ -21,15 +21,11 @@ class ObjectNodeToArrayHandler extends AbstractNodeToArrayHandler
         $array = array();
 
         foreach ($node->getAttributes() as $attribute) {
-            $array[$attribute->getFormattedName()] = $attribute->getValue();
+            $array[$attribute->getFormattedName()] =$this->getMainHandler()->getArray($attribute, true);
         }
 
         foreach ($node->getNodes() as $name => $childNode) {
-            if ($childNode instanceof ValueNode) {
-                $array[$name] = $childNode->getValue();
-            } else {
-                $array[$name] = $this->getMainHandler()->getArray($childNode);
-            }
+            $array[$name] = $this->getMainHandler()->getArray($childNode, true);
         }
 
         return $array;

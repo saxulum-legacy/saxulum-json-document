@@ -28,13 +28,14 @@ class NodeToArray
 
     /**
      * @param  AbstractNode $node
+     * @param  bool         $embedded
      * @return array
      */
-    public function getArray(AbstractNode $node)
+    public function getArray(AbstractNode $node, $embedded = false)
     {
         foreach ($this->handlers as $handler) {
             if ($handler->isResponsible($node)) {
-                return $handler->getArray($node);
+                return $handler->getArray($node, $embedded);
             }
         }
     }
