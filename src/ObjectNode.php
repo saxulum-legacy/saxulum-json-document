@@ -20,7 +20,7 @@ class ObjectNode extends AbstractParent
         }
 
         $this->checkNode($attribute);
-        $this->getDocument()->setProperty($attribute, 'parent', $this);
+        Document::setProperty($attribute, 'parent', $this);
         $this->attributes[$attribute->getName()] = $attribute;
     }
 
@@ -35,7 +35,7 @@ class ObjectNode extends AbstractParent
             throw new \InvalidArgumentException("Unknown node!");
         }
 
-        $this->getDocument()->setProperty($attribute, 'parent', null);
+        Document::setProperty($attribute, 'parent', null);
     }
 
     /**
@@ -66,7 +66,7 @@ class ObjectNode extends AbstractParent
         }
 
         $this->checkNode($node);
-        $this->getDocument()->setProperty($node, 'parent', $this);
+        Document::setProperty($node, 'parent', $this);
         $this->nodes[$node->getName()] = $node;
     }
 
@@ -80,6 +80,6 @@ class ObjectNode extends AbstractParent
             throw new \InvalidArgumentException("Unknown node!");
         }
 
-        $this->getDocument()->setProperty($node, 'parent', null);
+        Document::setProperty($node, 'parent', null);
     }
 }

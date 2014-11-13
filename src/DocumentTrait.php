@@ -28,8 +28,8 @@ trait DocumentTrait
     {
         $attribute = new AttributeNode();
 
-        $this->setProperty($attribute, 'name', $name);
-        $this->setProperty($attribute, 'document', $this);
+        Document::setProperty($attribute, 'name', $name);
+        Document::setProperty($attribute, 'document', $this);
 
         return $attribute;
     }
@@ -42,8 +42,8 @@ trait DocumentTrait
     {
         $value = new ValueNode();
 
-        $this->setProperty($value, 'name', $name);
-        $this->setProperty($value, 'document', $this);
+        Document::setProperty($value, 'name', $name);
+        Document::setProperty($value, 'document', $this);
 
         return $value;
     }
@@ -56,8 +56,8 @@ trait DocumentTrait
     {
         $object = new ObjectNode();
 
-        $this->setProperty($object, 'name', $name);
-        $this->setProperty($object, 'document', $this);
+        Document::setProperty($object, 'name', $name);
+        Document::setProperty($object, 'document', $this);
 
         return $object;
     }
@@ -70,27 +70,10 @@ trait DocumentTrait
     {
         $array = new ArrayNode();
 
-        $this->setProperty($array, 'name', $name);
-        $this->setProperty($array, 'document', $this);
+        Document::setProperty($array, 'name', $name);
+        Document::setProperty($array, 'document', $this);
 
         return $array;
-    }
-
-    /**
-     * @param object $object
-     * @param string $property
-     * @param mixed  $value
-     */
-    public function setProperty($object, $property, $value)
-    {
-        if (null === $this->reflection) {
-            $this->reflection = new \ReflectionClass('Saxulum\JsonDocument\AbstractNode');
-        }
-
-        $pRef = $this->reflection->getProperty($property);
-        $pRef->setAccessible(true);
-        $pRef->setValue($object, $value);
-        $pRef->setAccessible(false);
     }
 
     /**

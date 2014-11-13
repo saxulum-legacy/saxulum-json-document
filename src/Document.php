@@ -19,4 +19,23 @@ class Document
     {
         return new ArrayNodeBasedDocument();
     }
+
+    /**
+     * @param object $object
+     * @param string $property
+     * @param mixed  $value
+     */
+    public static function setProperty($object, $property, $value)
+    {
+        static $reflection;
+
+        if (null === $reflection) {
+            $reflection = new \ReflectionClass('Saxulum\JsonDocument\AbstractNode');
+        }
+
+        $pRef = $reflection->getProperty($property);
+        $pRef->setAccessible(true);
+        $pRef->setValue($object, $value);
+        $pRef->setAccessible(false);
+    }
 }
