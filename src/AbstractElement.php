@@ -5,7 +5,7 @@ namespace Saxulum\JsonDocument;
 abstract class AbstractElement extends AbstractNode
 {
     /**
-     * @return AttributeNode|null
+     * @return null|AbstractNode
      */
     public function previousSibling()
     {
@@ -17,7 +17,7 @@ abstract class AbstractElement extends AbstractNode
     }
 
     /**
-     * @return AttributeNode|null
+     * @return null|AbstractNode
      */
     public function nextSibling()
     {

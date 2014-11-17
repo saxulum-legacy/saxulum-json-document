@@ -31,7 +31,7 @@ interface DocumentInterface
     /**
      * @param  AbstractNode $node
      * @param  int          $options
-     * @param  callable     $filter
+     * @param  \Closure     $filter
      * @return string
      * @throws \Exception
      */
@@ -49,12 +49,14 @@ interface DocumentInterface
     public function getNode($index);
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function addNode(AbstractElement $node);
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function removeNode(AbstractElement $node);
 

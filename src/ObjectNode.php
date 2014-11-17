@@ -10,7 +10,8 @@ class ObjectNode extends AbstractParent
     protected $attributes = array();
 
     /**
-     * @param AttributeNode $attribute
+     * @param  AttributeNode $attribute
+     * @return void
      */
     public function addAttribute(AttributeNode $attribute)
     {
@@ -26,7 +27,8 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param AttributeNode $attribute
+     * @param  AttributeNode $attribute
+     * @return void
      * @throw \InvalidArgumentException
      */
     public function removeAttribute(AttributeNode $attribute)
@@ -41,6 +43,7 @@ class ObjectNode extends AbstractParent
 
     /**
      * @param  AttributeNode $node
+     * @return void
      * @throws \Exception
      */
     protected function checkAttribute(AttributeNode $node)
@@ -55,7 +58,8 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param AttributeNode $node
+     * @param  AttributeNode $node
+     * @return void
      */
     protected function removeAttributeFromParent(AttributeNode $node)
     {
@@ -74,7 +78,7 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param $name
+     * @param  string             $name
      * @return AttributeNode|null
      */
     public function getAttribute($name)
@@ -83,7 +87,8 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function addNode(AbstractElement $node)
     {
@@ -99,7 +104,8 @@ class ObjectNode extends AbstractParent
     }
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function removeNode(AbstractElement $node)
     {

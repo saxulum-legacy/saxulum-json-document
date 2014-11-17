@@ -79,7 +79,7 @@ trait DocumentTrait
     /**
      * @param  AbstractNode $node
      * @param  int          $options
-     * @param  callable     $filter
+     * @param  \Closure     $filter
      * @return string
      * @throws \Exception
      */

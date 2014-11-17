@@ -10,12 +10,12 @@ abstract class AbstractNode
     protected $name;
 
     /**
-     * @var Document
+     * @var DocumentInterface
      */
     protected $document;
 
     /**
-     * @var AbstractParent
+     * @var null|AbstractParent
      */
     protected $parent;
 
@@ -41,7 +41,7 @@ abstract class AbstractNode
     }
 
     /**
-     * @return AbstractParent|null
+     * @return null|AbstractParent
      */
     public function getParent()
     {
@@ -49,12 +49,12 @@ abstract class AbstractNode
     }
 
     /**
-     * @return AbstractNode|null
+     * @return null|AbstractNode
      */
     abstract public function previousSibling();
 
     /**
-     * @return AbstractNode|null
+     * @return null|AbstractNode
      */
     abstract public function nextSibling();
 

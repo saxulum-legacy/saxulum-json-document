@@ -27,12 +27,14 @@ abstract class AbstractParent extends AbstractElement
     }
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     abstract public function addNode(AbstractElement $node);
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     abstract public function removeNode(AbstractElement $node);
 

@@ -5,7 +5,8 @@ namespace Saxulum\JsonDocument;
 class ArrayNode extends AbstractParent
 {
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function addNode(AbstractElement $node)
     {
@@ -20,7 +21,8 @@ class ArrayNode extends AbstractParent
     }
 
     /**
-     * @param AbstractElement $node
+     * @param  AbstractElement $node
+     * @return void
      */
     public function removeNode(AbstractElement $node)
     {
