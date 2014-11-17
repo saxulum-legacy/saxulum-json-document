@@ -10,6 +10,11 @@ class AttributeNode extends AbstractNode
     protected $value;
 
     /**
+     * @var ObjectNode
+     */
+    protected $parent;
+
+    /**
      * @return string
      */
     public function getFormattedName()
@@ -39,7 +44,6 @@ class AttributeNode extends AbstractNode
      */
     public function previousSibling()
     {
-        /** @var ObjectNode $parent */
         if (null === $parent = $this->parent) {
             return null;
         }
@@ -52,7 +56,6 @@ class AttributeNode extends AbstractNode
      */
     public function nextSibling()
     {
-        /** @var ObjectNode $parent */
         if (null === $parent = $this->parent) {
             return null;
         }
