@@ -33,7 +33,7 @@ abstract class AbstractNode
     }
 
     /**
-     * @return Document
+     * @return DocumentInterface
      */
     public function getDocument()
     {
