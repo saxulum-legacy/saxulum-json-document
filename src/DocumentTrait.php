@@ -101,7 +101,7 @@ trait DocumentTrait
     /**
      * @return NodeToArray
      */
-    public function getNodeToArrayHandler()
+    protected function getNodeToArrayHandler()
     {
         if (null === $this->nodeToArrayHandler) {
             $this->nodeToArrayHandler = new NodeToArray(array(
