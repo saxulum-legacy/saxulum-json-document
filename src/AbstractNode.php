@@ -61,7 +61,7 @@ abstract class AbstractNode
     /**
      * @param  AbstractNode[]     $nodes
      * @param  int                $rel
-     * @return null|AttributeNode
+     * @return null|AbstractNode
      */
     protected function getSibling(array $nodes, $rel)
     {

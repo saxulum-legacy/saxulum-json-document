@@ -35,7 +35,7 @@ class AttributeNode extends AbstractNode
     }
 
     /**
-     * @return AttributeNode|null
+     * @return null|AttributeNode
      */
     public function previousSibling()
     {
@@ -48,7 +48,7 @@ class AttributeNode extends AbstractNode
     }
 
     /**
-     * @return AttributeNode|null
+     * @return null|AttributeNode
      */
     public function nextSibling()
     {
