@@ -17,5 +17,6 @@
   },
   "autoload": {
     "psr-4": { "Saxulum\\JsonDocument\\": "src/" }
-  }
+  },
+  "abandoned": true
 }
